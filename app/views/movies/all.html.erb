@@ -1,0 +1,8 @@
+<div class="container">
+  <h1>Movies</h1>
+  <% @movies.each do |movie| %>
+    <li><%= movie.title %>, rating : <%= movie.rating %></li>
+    <p><%= movie.overview %></p>
+    <img src=<%= movie.poster_url %> class="movie-img">
+    <% end %>
+</div>
