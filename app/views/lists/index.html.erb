@@ -1,16 +1,30 @@
-<div class="container list_creator" style>
+<div class="container list_creator">
   <div class="header">
-    <h1>WatchList Creator</h1>
-  </div>
-  <div class="movies_list">
-  <h2>Movies Lists</h2>
-    <ul class="list-cards">
-      <% @lists.each do |list| %>
-        <li>
-          <%= link_to list.name, list_path(list) %>
-        </li>
-      <% end %>
-          <%= link_to 'add list', new_list_path, :class => "btn btn-flat mt-5 rounded-pill"%>
-    </ul>
+    <div class="list-card mt-5"> <%# ⬅️ MAIN CARD%>
+     <h1>WatchList Creator</h1>
+      <span class="lists-tag"><%= pluralize(@lists.size, 'list') %></span>
+    </div>
   </div>
 </div>
+      <span class="mb-2"><small><em class="text-muted saved_lists"><%= "You haven't created any list yes!" if @lists.empty? %></em></small></span>
+  <div class="mx-5 container list">
+    <div class="lists_list">
+      <div class="header-list d-flex align-items-center">
+        <h2 class="my-3">Your Lists</h2>
+        <%= link_to 'add list', new_list_path, :class => "ms-3 btn btn-flat rounded-pill"%>
+      </div>
+        <div class="list-grid">
+          <% @lists.each do |list| %>
+            <div class="list-item-card">
+                <%# <%= image_tag() :class => "img_tag" %>
+                  <strong><%= list.name %></strong> <%# ⬅️ LIST NAME%>
+                    <div class="d-flex align-items-end justify-content-between pt-4">
+                      <span><%= pluralize(list.movies.size, 'movie') %></span>
+                      <small><%= link_to 'delete', "@lists_path(list)", data: { turbo_method: 'delete', turbo_confirm: "Are you sure you want to remove #{list.name}"}, class: 'text-light p-1 border rounded-pill bg-danger' %></small>
+                    </div>
+                    </div>
+                    <% end %>
+                  </div>
+          </div>
+      </div>
+    </div>
