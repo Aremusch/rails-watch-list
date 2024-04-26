@@ -6,25 +6,23 @@
     </div>
   </div>
 </div>
-      <span class="mb-2"><small><em class="text-muted saved_lists"><%= "You haven't created any list yes!" if @lists.empty? %></em></small></span>
-  <div class="mx-5 container list">
-    <div class="lists_list">
-      <div class="header-list d-flex align-items-center">
-        <h2 class="my-3">Your Lists</h2>
-        <%= link_to 'add list', new_list_path, :class => "ms-3 btn btn-flat rounded-pill"%>
-      </div>
-        <div class="list-grid">
-          <% @lists.each do |list| %>
-            <div class="list-item-card">
-                <%# <%= image_tag() :class => "img_tag" %>
-                  <strong><%= list.name %></strong> <%# ⬅️ LIST NAME%>
-                    <div class="d-flex align-items-end justify-content-between pt-4">
-                      <span><%= pluralize(list.movies.size, 'movie') %></span>
-                      <small><%= link_to 'delete', "@lists_path(list)", data: { turbo_method: 'delete', turbo_confirm: "Are you sure you want to remove #{list.name}"}, class: 'text-light p-1 border rounded-pill bg-danger' %></small>
-                    </div>
-                    </div>
-                    <% end %>
-                  </div>
-          </div>
-      </div>
+  <span class="mb-2"><small><em class="text-muted saved_lists"><%= "You haven't created any list yes!" if @lists.empty? %></em></small></span>
+    <div class="mx-5 container list">
+      <div class="lists_list">
+        <div class="header-list d-flex align-items-center">
+          <h2 class="my-3">Your Lists</h2>
+            <%= link_to 'add list', new_list_path, :class => "ms-3 btn btn-flat rounded-pill"%>
+        </div>
+    <div class="list-grid">
+      <% @lists.each do |list| %>
+        <div class="list-item-card">
+          <div class="banner-movie-list" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('<%= cl_image_path list.photo.key, height: 300, crop: :fill %>')">
+            <strong><%= link_to list.name, list_path(list) %></strong> <%# ⬅️ LIST NAME%>
+              <div class="d-flex align-items-end justify-content-between pt-4">
+                <span><%= pluralize(list.movies.size, 'movie') %></span>
+              </div>
+        </div>
+      <% end %>
     </div>
+      </div>
+</div>
